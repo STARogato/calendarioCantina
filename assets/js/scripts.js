@@ -59,6 +59,10 @@ function carregarCalendario(data) {
         diasContainer.appendChild(diaDiv);
     }
 }
+function diaPage(){
+        const diaNav = '../pages/dia.html';
+        window.location.href = diaNav;
+    }
 
 // Carregar o calendário inicial
 carregarCalendario(dataAtual);

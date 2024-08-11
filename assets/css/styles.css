@@ -10,10 +10,10 @@ body {
 
 #calendario {
     width: 500px;
-    border: 1px solid #ccc;
-    border-radius: 16px;
+    border: 1px solid #000000;
+    border-radius: 1 px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: #c77698;
 height: 400px;
 }
 
@@ -22,8 +22,8 @@ height: 400px;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #f1f1f1;
-    border-bottom: 1px solid #ccc;
+    background-color: #a22358;
+    border-bottom: 1px solid #000000;
 }
 
 #mes {
@@ -47,5 +47,9 @@ height: 400px;
 }
 
 #dias div:hover {
-    background-color: #eee;
+    background-color: #e694c4;
 }
+    #prev, #next{
+        background-color: #e694c4;
+    }
+
