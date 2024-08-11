@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+#calendario {
+    width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+height: 400px;
+}
+
+#cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ccc;
+}
+
+#mes {
+    font-weight: bold;
+}
+
+#diasDaSemana, #dias{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px;
+}
+
+#diasDaSemana div, #dias div {
+    text-align: center;
+    padding: 13px 0;
+}
+
+#dias div {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#dias div:hover {
+    background-color: #eee;
+}
