@@ -55,6 +55,7 @@ function carregarCalendario(data) {
                 carregarCalendario(dataAtual);
             }
         });
+        
 
         diasContainer.appendChild(diaDiv);
     }
