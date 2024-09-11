@@ -6,7 +6,6 @@ const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
 const addNoteButton = document.getElementById('addNote');
 const noteInput = document.getElementById('noteInput');
-
 const diasDaSemana = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
 let dataAtual = new Date();
 const notas = {}; 
@@ -47,23 +46,49 @@ function carregarCalendario(data) {
             diaDiv.style.backgroundColor = '#ffeb3b';
         }
 
+        // Adicionando evento de clique para abrir o campo de entrada de nota
         diaDiv.addEventListener('click', () => {
-            const notaExistente = notas[chaveData] || '';
-            const novaNota = prompt('Digite a nota para esse dia', notaExistente);
-            if (novaNota !== null) {
-                notas[chaveData] = novaNota;
-                carregarCalendario(dataAtual);
+            // Remover qualquer campo de entrada existente para evitar múltiplos campos
+            const inputExistente = diaDiv.querySelector('input');
+
+            diaDiv.addEventListener('dblclick', () => {
+                window.location.href = `dia.html?data=${chaveData}`;
+            });
+            if (inputExistente) {
+                return; // Evita a criação de vários campos de entrada
             }
+
+            const notaExistente = notas[chaveData] || '';
+
+            const inputNota = document.createElement('input');
+            inputNota.type = 'text';
+            inputNota.value = notaExistente;
+            inputNota.placeholder = 'Digite uma nota';
+            inputNota.classList.add('inputNota');
+
+            // Adicionando evento de salvar a nota ao pressionar Enter
+            inputNota.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    const novaNota = inputNota.value;
+                    if (novaNota !== '') {
+                        notas[chaveData] = novaNota; // Salva a nota
+                    } else {
+                        delete notas[chaveData]; // Remove a nota se estiver vazia
+                    }
+                    carregarCalendario(dataAtual); // Recarrega o calendário para atualizar a nota
+                }
+            });
+
+            // Adiciona o campo de input ao diaDiv
+            diaDiv.appendChild(inputNota);
+            inputNota.focus(); // Foca no campo de entrada
         });
-        
 
         diasContainer.appendChild(diaDiv);
     }
 }
-function diaPage(){
-        const diaNav = '../pages/dia.html';
-        window.location.href = diaNav;
-    }
+
+   
 
 // Carregar o calendário inicial
 carregarCalendario(dataAtual);
@@ -77,15 +102,4 @@ prevButton.addEventListener('click', () => {
 nextButton.addEventListener('click', () => {
     dataAtual.setMonth(dataAtual.getMonth() + 1);
     carregarCalendario(dataAtual);
-});
-
-// Adicionar notas
-addNoteButton.addEventListener('click', () => {
-    const dataSelecionada = prompt('Digite a data para adicionar a nota (formato: yyyy-mm-dd)');
-    const nota = prompt('Digite a nota para esse dia');
-
-    if (dataSelecionada && nota) {
-        notas[dataSelecionada] = nota; // Armazena a nota
-        carregarCalendario(dataAtual); // Recarrega o calendário para mostrar a nota
-    }
 });
